@@ -48,7 +48,7 @@ namespace inventory_management_system
             return article.ID == sellArtNr;
         }
 
-        internal static object getPrize(int sellCount, int sellArtNr, List<Article> list)
+        internal static double getPrize(int sellCount, int sellArtNr, List<Article> list)
         {
             return list[sellArtNr-1].Prize*sellCount;
         }
@@ -62,6 +62,11 @@ namespace inventory_management_system
         {
             return lager[sellArtNr-1].Count > sellCount;
         }
+
+        public int getID()
+        {
+            return ID;
+        }
     }
 
     class Electronic : Article
@@ -74,7 +79,6 @@ namespace inventory_management_system
             this.Count=count;
             this.Power = power;
             this.Prize=prize;
-            this.ID = GetNextID()-1; //-1 cs 2x constructor
         }
 
         public override string ToString()

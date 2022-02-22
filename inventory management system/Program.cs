@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Environment;
 
 namespace inventory_management_system
 {
@@ -101,7 +102,39 @@ namespace inventory_management_system
             Console.WriteLine("\nE-Mail:");
             compMail = Console.ReadLine();
 
+            Console.WriteLine("\n\n---------------------------------------------");
+            Console.WriteLine("1) Done 2)Print Receipt");
+
+            switch (Console.ReadLine())
+            {
+                case "2":
+                    WriteReceipt(sellArtNr, sellCount, company, compAdress, buyerName, compMail, Lager, Article.getPrize(sellCount, sellArtNr, Lager));
+                    break;
+                default:
+                    break;
+            }
+
             Lager[sellArtNr-1].Count -= sellCount;
+        }
+
+        private static void WriteReceipt(int sellArtNr, int sellCount, string? company, string? compAdress, string? buyerName, string? compMail, List<Article> lager, double prize)
+        {
+            StreamWriter sw = new StreamWriter(getReceiptSavePath()+@"\receipt.txt");
+
+            sw.WriteLine(company);
+            sw.WriteLine(buyerName);
+            sw.WriteLine(compAdress);
+            sw.WriteLine(compMail + "\n");
+
+            sw.WriteLine($"{sellCount}x {lager[sellArtNr-1].Name} NR: {lager[sellArtNr-1].getID():d5}\t{prize}$");
+
+            sw.Close();
+
+        }
+
+        private static string getReceiptSavePath()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
 
         static void Wareneingang()
