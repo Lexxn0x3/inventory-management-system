@@ -34,15 +34,6 @@ namespace inventory_management_system
             return str;
         }
 
-        //internal static Article getArticle(int sellArtNr, List<Article> list)
-        //{
-        //    for (int i = 0; i < list.Count; i++)
-        //    {
-        //        if (list[i].ID == sellArtNr)
-        //            return list[i];
-        //    }           
-        //}
-
         private static bool FindArtWithArtNr(Article article, int sellArtNr)
         {
             return article.ID == sellArtNr;
