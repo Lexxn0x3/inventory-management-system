@@ -137,7 +137,7 @@ namespace inventory_management_system
 
         
 
-        static string Eingabe_String(string Eingabetext)
+        public static string Eingabe_String(string Eingabetext)
         {
             Console.Write($"{Eingabetext}: \t");
             string Eingabe = Console.ReadLine();
