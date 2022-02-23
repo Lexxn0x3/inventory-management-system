@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace inventory_management_system
 {
-    internal class WarenEingang
+    internal class WarenEingang : inventory_management_system
     {
         static int count, price, power;
         static string name;
@@ -35,14 +35,14 @@ namespace inventory_management_system
             {
                 EingabeProperties_standart(out name, out count, out price);
 
-                Lager.Add(new Article(name, count, price));
+                list.Add(new Article(name, count, price));
                 
             }
             else
             {
                 EingabeProperties_electronics(out name, out count, out price, out power);
 
-                Lager.Add(new Electronic(name, count, price, power));
+                list.Add(new Electronic(name, count, price, power));
             }
         }
 

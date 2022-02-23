@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace inventory_management_system
 {
-    internal class Article
+    internal class Article : inventory_management_system
     {
         private static int currentID;
 
@@ -39,7 +39,7 @@ namespace inventory_management_system
             return article.ID == sellArtNr;
         }
 
-        internal static double getPrize(int sellCount, int sellArtNr, List<Article> list)
+        internal static double getPrize(int sellCount, int sellArtNr)
         {
             return list[sellArtNr-1].Prize*sellCount;
         }
