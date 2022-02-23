@@ -34,9 +34,19 @@ namespace inventory_management_system
             return str;
         }
 
-        private static bool FindArtWithArtNr(Article article, int sellArtNr)
+
+        public static bool getArticleFromArtNr(int artNr, out Article article)
         {
-            return article.ID == sellArtNr;
+            foreach (Article curArticle in list)
+            {
+                if (curArticle.ID == artNr)
+                {
+                    article = curArticle;
+                    return true;
+                }
+            }
+            article = null;
+            return false;
         }
 
         internal static double getPrize(int sellCount, int sellArtNr)
@@ -44,14 +54,9 @@ namespace inventory_management_system
             return list[sellArtNr-1].Prize*sellCount;
         }
 
-        internal static bool Exists(int sellArtNr, List<Article> list)
+        internal static bool CountAvailable(int sellArtNr, int sellCount)
         {
-            return list.Count >= sellArtNr;
-        }
-
-        internal static bool CountAvailable(int sellArtNr, int sellCount, List<Article> lager)
-        {
-            return lager[sellArtNr-1].Count > sellCount;
+            return list[sellArtNr-1].Count > sellCount;
         }
 
         public int getID()

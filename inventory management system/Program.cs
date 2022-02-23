@@ -56,6 +56,7 @@ namespace inventory_management_system
             int sellArtNr;
             int sellCount;
             string company, buyerName, compAdress, compMail;
+            Article article;
 
             Console.WriteLine("Sell\n");
 
@@ -67,7 +68,7 @@ namespace inventory_management_system
 
             //Does Article Exist?
 
-            if (!Article.Exists(sellArtNr, list))
+            if (!Article.getArticleFromArtNr(sellArtNr, out article))
             {
                 Console.WriteLine("Article does not exist!");
                 return;
@@ -80,7 +81,7 @@ namespace inventory_management_system
 
             //Count < available Count?
 
-            if (!Article.CountAvailable(sellArtNr, sellCount, list))
+            if (!Article.CountAvailable(sellArtNr, sellCount))
             {
                 Console.WriteLine("Not enough stock!");
                 return;
@@ -104,7 +105,8 @@ namespace inventory_management_system
             switch (Console.ReadLine())
             {
                 case "2":
-                    WriteReceipt(sellArtNr, sellCount, company, compAdress, buyerName, compMail, list, Article.getPrize(sellCount, sellArtNr));
+                    Order newOrder = new Order(article, sellCount, company, compAdress, compMail, buyerName);
+                    newOrder.WriteReceipt();
                     break;
                 default:
                     break;
@@ -135,7 +137,7 @@ namespace inventory_management_system
 
         
 
-        public static string Eingabe_String(string Eingabetext)
+        static string Eingabe_String(string Eingabetext)
         {
             Console.Write($"{Eingabetext}: \t");
             string Eingabe = Console.ReadLine();
