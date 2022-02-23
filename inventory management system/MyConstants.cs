@@ -8,6 +8,6 @@ namespace inventory_management_system
 {
     internal class MyConstants
     {
-        public new const string Abstandhalter = "\n--------------------------------------------------------------\n";
+        public const string Abstandhalter = "\n--------------------------------------------------------------\n";
     }
 }

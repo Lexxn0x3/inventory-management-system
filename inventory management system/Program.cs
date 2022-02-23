@@ -56,6 +56,7 @@ namespace inventory_management_system
             int sellArtNr;
             int sellCount;
             string company, buyerName, compAdress, compMail;
+            Article article;
 
             Console.WriteLine("Sell\n");
 
@@ -67,7 +68,7 @@ namespace inventory_management_system
 
             //Does Article Exist?
 
-            if (!Article.Exists(sellArtNr, list))
+            if (!Article.getArticleFromArtNr(sellArtNr, out article))
             {
                 Console.WriteLine("Article does not exist!");
                 return;
@@ -80,7 +81,7 @@ namespace inventory_management_system
 
             //Count < available Count?
 
-            if (!Article.CountAvailable(sellArtNr, sellCount, list))
+            if (!Article.CountAvailable(sellArtNr, sellCount))
             {
                 Console.WriteLine("Not enough stock!");
                 return;
@@ -104,7 +105,8 @@ namespace inventory_management_system
             switch (Console.ReadLine())
             {
                 case "2":
-                    WriteReceipt(sellArtNr, sellCount, company, compAdress, buyerName, compMail, list, Article.getPrize(sellCount, sellArtNr));
+                    Order newOrder = new Order(article, sellCount, company, compAdress, compMail, buyerName);
+                    newOrder.WriteReceipt();
                     break;
                 default:
                     break;
@@ -112,29 +114,6 @@ namespace inventory_management_system
 
             list[sellArtNr-1].Count -= sellCount;
         }
-
-        private static void WriteReceipt(int sellArtNr, int sellCount, string? company, string? compAdress, string? buyerName, string? compMail, List<Article> lager, double prize)
-        {
-            StreamWriter sw = new StreamWriter(getReceiptSavePath()+@"\receipt.txt");
-
-            sw.WriteLine(company);
-            sw.WriteLine(buyerName);
-            sw.WriteLine(compAdress);
-            sw.WriteLine(compMail + "\n");
-
-            sw.WriteLine($"{sellCount}x {lager[sellArtNr-1].Name} NR: {lager[sellArtNr-1].getID():d5}\t{prize}$");
-
-            sw.Close();
-
-        }
-
-        private static string getReceiptSavePath()
-        {
-            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        }
-
-        
-
         static string Eingabe_String(string Eingabetext)
         {
             Console.Write($"{Eingabetext}: ");
