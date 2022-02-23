@@ -48,6 +48,7 @@ namespace inventory_management_system
 
         static void ExistingProduct()
         {
+            Console.WriteLine($"{MyConstants.Abstandhalter}Zu welcher Kategorie gehört der Artikel?\t1) Keiner\t2) Elektronik");
 
         }
 
