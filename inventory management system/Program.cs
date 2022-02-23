@@ -135,21 +135,21 @@ namespace inventory_management_system
 
         
 
-        static string Eingabe_String(string Eingabetext)
+        public static string Eingabe_String(string Eingabetext)
         {
-            Console.Write($"{Eingabetext}: ");
+            Console.Write($"{Eingabetext}: \t");
             string Eingabe = Console.ReadLine();
 
             return Eingabe;
         }
 
-        static int Eingabe_Int(string Eingabetext)
+        public static int Eingabe_Int(string Eingabetext)
         {
             int Eingabe;
 
-            Console.WriteLine($"{Eingabetext}: ");
+            Console.Write($"{Eingabetext}: \t");
             do
-            { } while (int.TryParse(Console.ReadLine(), out Eingabe));
+            { } while (!int.TryParse(Console.ReadLine(), out Eingabe));
 
             return Eingabe;
         }

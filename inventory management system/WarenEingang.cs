@@ -72,24 +72,5 @@ namespace inventory_management_system
 
             power = Eingabe_Int("Stromverbrauch");
         }
-
-        static string Eingabe_String(string Eingabetext)
-        {
-            Console.Write($"{Eingabetext}: ");
-            string Eingabe = Console.ReadLine();
-
-            return Eingabe;
-        }
-
-        static int Eingabe_Int(string Eingabetext)
-        {
-            int Eingabe;
-
-            Console.WriteLine($"{Eingabetext}: ");
-            do
-            { } while (int.TryParse(Console.ReadLine(), out Eingabe));
-
-            return Eingabe;
-        }
     }
 }
