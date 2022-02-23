@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace inventory_management_system
 {
-    internal class Order
+    internal class Verkauf
     {
     }
 }

@@ -5,8 +5,8 @@ namespace inventory_management_system
 {
     class inventory_management_system
     {
-        private static List<Article> Lager = new List<Article>();
-        private new const String Abstandhalter = "\n--------------------------------------------------------------\n";
+        public static List<Article> Lager = new List<Article>();
+        
 
         static void Main(string[] args)
         {
@@ -36,7 +36,7 @@ namespace inventory_management_system
                 Console.WriteLine(Lager[i]);
             }
 
-            Console.WriteLine($"{Abstandhalter}1) Verkaufen\t2) Wareneingang");
+            Console.WriteLine($"{MyConstants.Abstandhalter}1) Verkaufen\t2) Wareneingang");
 
             switch (Console.ReadLine())
             {
@@ -44,7 +44,7 @@ namespace inventory_management_system
                     Verkauf();
                     break;
                 case "2":
-                    Wareneingang();
+                    WarenEingang.Eingang();
                     break;
                 default:
                     break;
@@ -90,17 +90,13 @@ namespace inventory_management_system
 
             Console.WriteLine("Contact info:\n");
 
-            Console.WriteLine("Company:");
-            company = Console.ReadLine();
+            company = Eingabe_String("Company");
 
-            Console.WriteLine("\nName:");
-            buyerName = Console.ReadLine();
+            buyerName = Eingabe_String("buyerName");
 
-            Console.WriteLine("\nAdress:");
-            compAdress = Console.ReadLine();
+            compAdress = Eingabe_String("Adresse");
 
-            Console.WriteLine("\nE-Mail:");
-            compMail = Console.ReadLine();
+            compMail = Eingabe_String("E-Mail");
 
             Console.WriteLine("\n\n---------------------------------------------");
             Console.WriteLine("1) Done 2)Print Receipt");
@@ -137,63 +133,25 @@ namespace inventory_management_system
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
 
-        static void Wareneingang()
-        {
-            int count, price, power;
-            string name;
-
-
-            Console.WriteLine($"{Abstandhalter}1) neuer Artikel\t2) bestehender Artikel");
-
-            if (Convert.ToInt32(Console.ReadLine()) == 1)
-            {
-                Console.WriteLine($"{Abstandhalter}Zu welcher Kategorie gehört der Artikel?\t1) Keiner\t2) Elektronik");
-
-                if (Convert.ToInt32(Console.ReadLine())== 1)
-                {
-                    EingabeProperties_standart(out name, out count, out price);
-
-                    Lager.Add(new Article(name, count, price));
-                }
-                else
-                {
-                    EingabeProperties_electronics(out name, out count, out price, out power);
-
-                    Lager.Add(new Electronic(name, count, price, power));
-                }
-            }
-            else
-            {
-
-            }
-        }
         
-        //Eingabe von einem normalen Artikel
 
-        static void EingabeProperties_standart(out string name, out int count, out int price)
+        static string Eingabe_String(string Eingabetext)
         {
-            Console.Write("Name: ");        ////In Methode auslagern
-            name = Console.ReadLine();
+            Console.Write($"{Eingabetext}: ");
+            string Eingabe = Console.ReadLine();
 
-            Console.Write("Anzahl: ");
-            int.TryParse(Console.ReadLine(), out count);
-
-            Console.Write("Preis: ");
-            int.TryParse(Console.ReadLine(), out price);
-
-
+            return Eingabe;
         }
 
-        //Eingabe von einem Elektronik-Artikel
-
-        static void EingabeProperties_electronics(out string name, out int count, out int price, out int power)
+        static int Eingabe_Int(string Eingabetext)
         {
-            EingabeProperties_standart(out name, out count, out price);
+            int Eingabe;
 
-            Console.Write("Stromverbrauch: ");
-
+            Console.WriteLine($"{Eingabetext}: ");
             do
-            { } while (int.TryParse(Console.ReadLine(), out power));
+            { } while (int.TryParse(Console.ReadLine(), out Eingabe));
+
+            return Eingabe;
         }
 
     }
