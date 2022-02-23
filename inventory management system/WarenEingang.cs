@@ -57,14 +57,14 @@ namespace inventory_management_system
             do {artnr = Eingabe_Int("Wie lautet die Artikelnummer des Produktes");
             }while (!Article.getArticleFromArtNr(artnr, out article));
 
-            int Eingabe = Eingabe_Int("Welchen Atribut möchten sie verändern?\t1) name\t2) count\t3)price");
+            int Eingabe = Eingabe_Int("Welchen Atribut möchten sie verändern?\t1) name\t2) addarticle\t3)price");
             switch (Eingabe)
             {
                 case 1:
                     article.Name = Eingabe_String("newname");
                     break;
                 case 2:
-                    article.Count = Eingabe_Int("newcount");
+                    article.Count += Eingabe_Int($"how many {article.Name} do you want to add?");
                     break;
                 case 3:
                     article.Price = Eingabe_Int("newprice");
