@@ -46,7 +46,7 @@ namespace inventory_management_system
 
         private double getTotalPrize()
         {
-            return article.Prize*count;
+            return article.Price*count;
         }
     }
 }

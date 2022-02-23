@@ -13,13 +13,13 @@ namespace inventory_management_system
         protected int ID;
         public string Name { get; set; }
         public int Count { get; set; }
-        public double Prize { get; set; }
+        public double Price { get; set; }
 
         public Article(string name, int count = 0, double prize = 0)
         {
             this.Name = name;
             this.Count = count;
-            this.Prize = prize;
+            this.Price = prize;
             this.ID = GetNextID();
         }
 
@@ -30,7 +30,7 @@ namespace inventory_management_system
         {
             string str = "";
 
-            str = $"{ID:d5}, {Name}, x{Count}, {Prize}$";
+            str = $"{ID:d5}, {Name}, x{Count}, {Price}$";
             return str;
         }
 
@@ -51,7 +51,7 @@ namespace inventory_management_system
 
         internal static double getPrize(int sellCount, int sellArtNr)
         {
-            return list[sellArtNr-1].Prize*sellCount;
+            return list[sellArtNr-1].Price*sellCount;
         }
 
         internal static bool CountAvailable(int sellArtNr, int sellCount)
@@ -74,14 +74,14 @@ namespace inventory_management_system
             this.Name=name;
             this.Count=count;
             this.Power = power;
-            this.Prize=prize;
+            this.Price=prize;
         }
 
         public override string ToString()
         {
             string str = "";
 
-            str = $"{ID:d5}, {Name}, x{Count}, {Prize}$, {Power}Watt";
+            str = $"{ID:d5}, {Name}, x{Count}, {Price}$, {Power}Watt";
             return str;
         }
     }

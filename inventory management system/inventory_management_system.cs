@@ -114,21 +114,21 @@ namespace inventory_management_system
 
             list[sellArtNr-1].Count -= sellCount;
         }
-        static string Eingabe_String(string Eingabetext)
+        public static string Eingabe_String(string Eingabetext)
         {
-            Console.Write($"{Eingabetext}: ");
+            Console.WriteLine($"{Eingabetext}: ");
             string Eingabe = Console.ReadLine();
 
             return Eingabe;
         }
 
-        static int Eingabe_Int(string Eingabetext)
+        public static int Eingabe_Int(string Eingabetext)
         {
             int Eingabe;
 
             Console.WriteLine($"{Eingabetext}: ");
             do
-            { } while (int.TryParse(Console.ReadLine(), out Eingabe));
+            { } while (!int.TryParse(Console.ReadLine(), out Eingabe));
 
             return Eingabe;
         }

@@ -46,12 +46,36 @@ namespace inventory_management_system
             }
         }
 
+        //vorhandenes Produkt
+
         static void ExistingProduct()
         {
+            Console.WriteLine($"{MyConstants.Abstandhalter}");
 
+            int artnr;
+            Article article;
+            do {artnr = Eingabe_Int("Wie lautet die Artikelnummer des Produktes");
+            }while (!Article.getArticleFromArtNr(artnr, out article));
+
+            int Eingabe = Eingabe_Int("Welchen Atribut möchten sie verändern?\t1) name\t2) count\t3)price");
+            switch (Eingabe)
+            {
+                case 1:
+                    article.Name = Eingabe_String("newname");
+                    break;
+                case 2:
+                    article.Count = Eingabe_Int("newcount");
+                    break;
+                case 3:
+                    article.Price = Eingabe_Int("newprice");
+                    break;
+                default:
+                    ExistingProduct();
+                    break;
+
+                    list[artnr-1] = article;
+            }
         }
-
-        //vorhandenes Produkt
 
         //Eingabe von einem normalen Artikel
 
@@ -73,23 +97,5 @@ namespace inventory_management_system
             power = Eingabe_Int("Stromverbrauch");
         }
 
-        static string Eingabe_String(string Eingabetext)
-        {
-            Console.Write($"{Eingabetext}: ");
-            string Eingabe = Console.ReadLine();
-
-            return Eingabe;
-        }
-
-        static int Eingabe_Int(string Eingabetext)
-        {
-            int Eingabe;
-
-            Console.WriteLine($"{Eingabetext}: ");
-            do
-            { } while (int.TryParse(Console.ReadLine(), out Eingabe));
-
-            return Eingabe;
-        }
     }
 }
