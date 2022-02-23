@@ -49,7 +49,7 @@ namespace inventory_management_system
             return false;
         }
 
-        internal static double getPrize(int sellCount, int sellArtNr)
+        internal static double getPrice(int sellCount, int sellArtNr)
         {
             return list[sellArtNr-1].Price*sellCount;
         }

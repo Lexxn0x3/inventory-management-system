@@ -87,7 +87,7 @@ namespace inventory_management_system
                 return;
             }
 
-            Console.WriteLine($"{Article.getPrize(sellCount, sellArtNr)}$");
+            Console.WriteLine($"{Article.getPrice(sellCount, sellArtNr)}$");
 
             Console.WriteLine("Contact info:\n");
 
