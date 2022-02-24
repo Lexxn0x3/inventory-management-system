@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace inventory_management_system
 {
-    internal class WarenEingang : inventory_management_system
+    internal class WarenEingang : Program
     {
         static int count, price, power;
         static string name;

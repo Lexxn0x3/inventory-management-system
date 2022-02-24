@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace inventory_management_system
 {
-    internal class Article : inventory_management_system
+    internal class Article : Program
     {
         private static int currentID;
 

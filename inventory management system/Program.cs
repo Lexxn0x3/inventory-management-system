@@ -3,7 +3,7 @@ using static System.Environment;
 
 namespace inventory_management_system
 {
-    class inventory_management_system
+    class Program
     {
         public static List<Article> list = new List<Article>();
         
