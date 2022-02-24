@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace inventory_management_system
 {
-    internal class Order
+    class Order
     {
         Article article;
         int count;
         string companyName;
         string buyerName;
-        string adress;
+        string address;
         string mail;
 
         public Order(Article orderArticle, int count, string compname, string adress, string mail, string buyer)
@@ -20,7 +20,7 @@ namespace inventory_management_system
             this.article = orderArticle;
             this.count = count;
             this.companyName = compname;
-            this.adress = adress;
+            this.address = adress;
             this.mail = mail;
             this.buyerName = buyer;
         }
@@ -31,7 +31,7 @@ namespace inventory_management_system
 
             sw.WriteLine(companyName);
             sw.WriteLine(buyerName);
-            sw.WriteLine(adress);
+            sw.WriteLine(address);
             sw.WriteLine(mail + "\n");
 
             sw.WriteLine($"{count}x {article.Name} NR: {article.getID():d5}\t{getTotalPrize()}$");

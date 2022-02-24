@@ -7,7 +7,6 @@ namespace inventory_management_system
     {
         public static List<Article> list = new List<Article>();
         
-
         static void Main(string[] args)
         {
             //Article List
@@ -23,6 +22,7 @@ namespace inventory_management_system
 
             while (true)
             {
+                Console.Clear();
                 Lagerbestand();
             }
         }
@@ -36,7 +36,7 @@ namespace inventory_management_system
                 Console.WriteLine(list[i]);
             }
 
-            Console.WriteLine($"{MyConstants.Abstandhalter}1) Verkaufen\t2) Wareneingang");
+            Console.WriteLine($"{ImsHelper.Abstandhalter}1) Verkaufen\t2) Wareneingang");
 
             switch (Console.ReadLine())
             {
@@ -55,11 +55,10 @@ namespace inventory_management_system
         {
             int sellArtNr;
             int sellCount;
-            string company, buyerName, compAdress, compMail;
+            string company, buyerName, compAddress, compMail;
             Article article;
 
             Console.WriteLine("Sell\n");
-
 
             do
             {
@@ -91,21 +90,21 @@ namespace inventory_management_system
 
             Console.WriteLine("Contact info:\n");
 
-            company = Eingabe_String("Company");
+            company = ImsHelper.InputWithPrompt("Company: ");
 
-            buyerName = Eingabe_String("buyerName");
+            buyerName = ImsHelper.InputWithPrompt("Name: ");
 
-            compAdress = Eingabe_String("Adresse");
+            compAddress = ImsHelper.InputWithPrompt("Address: ");
 
-            compMail = Eingabe_String("E-Mail");
+            compMail = ImsHelper.InputWithPrompt("E-Mail: ");
 
             Console.WriteLine("\n\n---------------------------------------------");
-            Console.WriteLine("1) Done 2)Print Receipt");
+            Console.WriteLine("1) Done    2) Print Receipt");
 
             switch (Console.ReadLine())
             {
                 case "2":
-                    Order newOrder = new Order(article, sellCount, company, compAdress, compMail, buyerName);
+                    Order newOrder = new Order(article, sellCount, company, compAddress, compMail, buyerName);
                     newOrder.WriteReceipt();
                     break;
                 default:
@@ -114,25 +113,6 @@ namespace inventory_management_system
 
             list[sellArtNr-1].Count -= sellCount;
         }
-        public static string Eingabe_String(string Eingabetext)
-        {
-            Console.WriteLine($"{Eingabetext}: ");
-            string Eingabe = Console.ReadLine();
-
-            return Eingabe;
-        }
-
-        public static int Eingabe_Int(string Eingabetext)
-        {
-            int Eingabe;
-
-            Console.WriteLine($"{Eingabetext}: ");
-            do
-            { } while (!int.TryParse(Console.ReadLine(), out Eingabe));
-
-            return Eingabe;
-        }
-
     }
 }
 

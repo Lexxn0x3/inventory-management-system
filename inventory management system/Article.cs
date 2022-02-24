@@ -23,8 +23,14 @@ namespace inventory_management_system
             this.ID = GetNextID();
         }
 
-        static Article() => currentID = 0;
-        protected int GetNextID() => ++currentID;
+        static Article()
+        {
+            currentID = 0;
+        }
+        private int GetNextID() 
+        {
+            return ++currentID;
+        }
 
         public override string ToString()
         {
@@ -33,7 +39,6 @@ namespace inventory_management_system
             str = $"{ID:d5}, {Name}, x{Count}, {Price}$";
             return str;
         }
-
 
         public static bool getArticleFromArtNr(int artNr, out Article article)
         {
@@ -49,12 +54,7 @@ namespace inventory_management_system
             return false;
         }
 
-        //internal static double getPrice(int sellCount, int sellArtNr)
-        //{
-        //    return list[sellArtNr-1].Price*sellCount;
-        //}
-
-        internal static bool CountAvailable(int sellArtNr, int sellCount)
+        public static bool CountAvailable(int sellArtNr, int sellCount)
         {
             return list[sellArtNr-1].Count > sellCount;
         }
@@ -69,12 +69,12 @@ namespace inventory_management_system
     {
         public int Power { get; set; }
 
-        public Electronic(string name, int count = 0, double prize = 0, int power = 0) : base(name, count, prize)
+        public Electronic(string name, int count = 0, double price = 0, int power = 0) : base(name, count, price)
         {
             this.Name=name;
             this.Count=count;
             this.Power = power;
-            this.Price=prize;
+            this.Price=price;
         }
 
         public override string ToString()
