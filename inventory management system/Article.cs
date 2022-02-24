@@ -73,7 +73,7 @@ namespace inventory_management_system
         {
             this.Name=name;
             this.Count=count;
-            this.Power = power;
+            this.Power=power;
             this.Prize=prize;
         }
 
