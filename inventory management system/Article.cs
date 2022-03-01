@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace inventory_management_system
 {
-    internal class Article : inventory_management_system
+    internal class Article : Program
     {
         private static int currentID;
 
@@ -23,8 +23,14 @@ namespace inventory_management_system
             this.ID = GetNextID();
         }
 
-        static Article() => currentID = 0;
-        protected int GetNextID() => ++currentID;
+        static Article()
+        {
+            currentID = 0;
+        }
+        private int GetNextID() 
+        {
+            return ++currentID;
+        }
 
         public override string ToString()
         {
@@ -33,7 +39,6 @@ namespace inventory_management_system
             str = $"{ID:d5}, {Name}, x{Count}, {Price}$";
             return str;
         }
-
 
         public static bool getArticleFromArtNr(int artNr, out Article article)
         {
@@ -49,12 +54,7 @@ namespace inventory_management_system
             return false;
         }
 
-        internal static double getPrize(int sellCount, int sellArtNr)
-        {
-            return list[sellArtNr-1].Price*sellCount;
-        }
-
-        internal static bool CountAvailable(int sellArtNr, int sellCount)
+        public static bool CountAvailable(int sellArtNr, int sellCount)
         {
             return list[sellArtNr-1].Count > sellCount;
         }
