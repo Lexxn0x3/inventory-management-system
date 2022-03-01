@@ -34,7 +34,7 @@ namespace inventory_management_system
             sw.WriteLine(adress);
             sw.WriteLine(mail + "\n");
 
-            sw.WriteLine($"{count}x {article.Name} NR: {article.getID():d5}\t{getTotalPrize()}$");
+            sw.WriteLine($"{count}x {article.Name} NR: {article.getID():d5}\t{getTotalPrice()}$");
 
             sw.Close();
         }
@@ -44,9 +44,9 @@ namespace inventory_management_system
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
 
-        private double getTotalPrize()
+        private double getTotalPrice()
         {
-            return article.Prize*count;
+            return article.Price*count;
         }
     }
 }

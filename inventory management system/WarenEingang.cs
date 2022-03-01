@@ -59,6 +59,7 @@ namespace inventory_management_system
         static void EingabeProperties_standart(out string name, out int count, out int price)
         {
             name = Eingabe_String("name");
+            name = Eingabe_String("name");
 
             count = Eingabe_Int("Anzahl");
 
