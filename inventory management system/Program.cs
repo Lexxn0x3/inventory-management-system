@@ -11,23 +11,41 @@ namespace inventory_management_system
         {
             //Article List
 
-            list.Add(new Article("Regal"));
-            list.Add(new Article("Regal1"));
-            list.Add(new Article("Regal2"));
-            list.Add(new Article("Regal3"));
-            list.Add(new Article("Regal4"));
-            list.Add(new Article("Regal5"));
-            list.Add(new Electronic("Smartphone1", 1000, 350, 10));
+            //list.Add(new Article("Regal"));
+            //list.Add(new Article("Regal1"));
+            //list.Add(new Article("Regal2"));
+            //list.Add(new Article("Regal3"));
+            //list.Add(new Article("Regal4"));
+            //list.Add(new Article("Regal5"));
+            //list.Add(new Electronic("Smartphone1", 1000, 350, 10));
 
 
             while (true)
             {
                 Console.Clear();
-                Lagerbestand();
+                Inventory();
+                Selection();
             }
         }
 
-        static void Lagerbestand()
+        private static void Selection()
+        {
+            Console.WriteLine($"{ImsHelper.stringSeperator}1) Verkaufen\t2) Wareneingang");
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Sell();
+                    break;
+                case "2":
+                    ProductManagement.ReceiveProduct(list);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        static void Inventory()
         {
             Console.WriteLine("Lagerbestand:\n");
 
@@ -35,23 +53,9 @@ namespace inventory_management_system
             {
                 Console.WriteLine(list[i]);
             }
-
-            Console.WriteLine($"{ImsHelper.Abstandhalter}1) Verkaufen\t2) Wareneingang");
-
-            switch (Console.ReadLine())
-            {
-                case "1":
-                    Verkauf();
-                    break;
-                case "2":
-                    WarenEingang.Eingang();
-                    break;
-                default:
-                    break;
-            }
         }
 
-        static void Verkauf()
+        static void Sell()
         {
             int sellArtNr;
             int sellCount;
@@ -63,11 +67,12 @@ namespace inventory_management_system
             do
             {
                 Console.WriteLine("ArtNr: ");
-            } while (!int.TryParse(Console.ReadLine(), out sellArtNr));
+            } 
+            while (!int.TryParse(Console.ReadLine(), out sellArtNr));
 
             //Does Article Exist?
 
-            if (!Article.getArticleFromArtNr(sellArtNr, out article))
+            if (!Article.GetArticleFromArtNr(sellArtNr, list, out article))
             {
                 Console.WriteLine("Article does not exist!");
                 return;
@@ -80,7 +85,7 @@ namespace inventory_management_system
 
             //Count < available Count?
 
-            if (!Article.CountAvailable(sellArtNr, sellCount))
+            if (!Article.CountAvailable(sellArtNr, sellCount, list))
             {
                 Console.WriteLine("Not enough stock!");
                 return;
@@ -98,7 +103,7 @@ namespace inventory_management_system
 
             compMail = ImsHelper.InputWithPrompt("E-Mail: ");
 
-            Console.WriteLine("\n\n---------------------------------------------");
+            Console.Write(ImsHelper.stringSeperator);
             Console.WriteLine("1) Done    2) Print Receipt");
 
             switch (Console.ReadLine())
@@ -111,7 +116,7 @@ namespace inventory_management_system
                     break;
             }
 
-            list[sellArtNr-1].Count -= sellCount;
+            list[Article.GetArticleIndex(sellArtNr, list)].Count -= sellCount;
         }
     }
 }

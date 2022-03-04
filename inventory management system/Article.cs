@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace inventory_management_system
+﻿namespace inventory_management_system
 {
-    internal class Article : Program
+    internal class Article
     {
-        private static int currentID;
-
-        protected int ID;
+        public int ID { get; }
         public string Name { get; set; }
         public int Count { get; set; }
         public double Price { get; set; }
@@ -20,27 +12,23 @@ namespace inventory_management_system
             this.Name = name;
             this.Count = count;
             this.Price = price;
-            this.ID = GetNextID();
+            this.ID = GetID();
         }
-
-        static Article()
+        private int GetID() 
         {
-            currentID = 0;
-        }
-        private int GetNextID() 
-        {
-            return ++currentID;
+            Random random = new();
+            return random.Next();
         }
 
         public override string ToString()
         {
             string str = "";
 
-            str = $"{ID:d5}, {Name}, x{Count}, {Price}$";
+            str = $"{ID:d10}, {Name}, x{Count}, {Price}$";
             return str;
         }
 
-        public static bool getArticleFromArtNr(int artNr, out Article article)
+        public static bool GetArticleFromArtNr(int artNr, List<Article> list, out Article article)
         {
             foreach (Article curArticle in list)
             {
@@ -54,14 +42,19 @@ namespace inventory_management_system
             return false;
         }
 
-        public static bool CountAvailable(int sellArtNr, int sellCount)
+        public static int GetArticleIndex(int artNr, List<Article> list)
         {
-            return list[sellArtNr-1].Count > sellCount;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].ID == artNr)
+                    return i;
+            }
+            return -1;
         }
 
-        public int getID()
+        public static bool CountAvailable(int sellArtNr, int sellCount , List<Article> list)
         {
-            return ID;
+            return list[GetArticleIndex(sellArtNr, list)].Count >= sellCount;
         }
     }
 
@@ -71,17 +64,14 @@ namespace inventory_management_system
 
         public Electronic(string name, int count = 0, double price = 0, int power = 0) : base(name, count, price)
         {
-            this.Name=name;
-            this.Count=count;
             this.Power=power;
-            this.Price=price;
         }
 
         public override string ToString()
         {
             string str = "";
 
-            str = $"{ID:d5}, {Name}, x{Count}, {Price}$, {Power}Watt";
+            str = $"{ID:d10}, {Name}, x{Count}, {Price}$, {Power}Watt";
             return str;
         }
     }

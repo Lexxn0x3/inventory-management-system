@@ -8,25 +8,28 @@ namespace inventory_management_system
 {
     class ImsHelper
     {
-        public const string Abstandhalter = "\n--------------------------------------------------------------\n";
+        public const string stringSeperator = "\n--------------------------------------------------------------\n";
 
-        public static string InputWithPrompt(string Eingabetext)
+        public static string InputWithPrompt(string promptText)
         {
-            Console.WriteLine($"{Eingabetext}: ");
+            Console.WriteLine($"{promptText}: ");
             string Eingabe = Console.ReadLine();
 
             return Eingabe;
         }
 
-        public static int InputWithPromptInt(string Eingabetext)
+        public static int InputWithPromptInt(string promptText)
         {
-            int Eingabe;
+            int input;
 
-            Console.WriteLine($"{Eingabetext}: ");
             do
-            { } while (!int.TryParse(Console.ReadLine(), out Eingabe));
+            {
+                Console.WriteLine($"{promptText}: ");
 
-            return Eingabe;
+            } 
+            while (!int.TryParse(Console.ReadLine(), out input));
+
+            return input;
         }
     }
 }

@@ -27,24 +27,24 @@ namespace inventory_management_system
 
         public void WriteReceipt()
         {
-            StreamWriter sw = new StreamWriter(getReceiptSavePath()+@"\receipt.txt");
+            StreamWriter sw = new StreamWriter(GetReceiptSavePath()+@"\receipt.txt");
 
             sw.WriteLine(companyName);
             sw.WriteLine(buyerName);
             sw.WriteLine(address);
             sw.WriteLine(mail + "\n");
 
-            sw.WriteLine($"{count}x {article.Name} NR: {article.getID():d5}\t{getTotalPrice()}$");
+            sw.WriteLine($"{count}x {article.Name} NR: {article.ID:d10}\t{GetTotalPrice()}$");
 
             sw.Close();
         }
 
-        private static string getReceiptSavePath()
+        private static string GetReceiptSavePath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
 
-        private double getTotalPrice()
+        private double GetTotalPrice()
         {
             return article.Price*count;
         }
